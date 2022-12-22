@@ -28,8 +28,8 @@ function init(){
     num_cells = document.querySelector(".num_cells").value
     // ROWS = document.querySelector(".num_rows").value
     // COLS = document.querySelector(".num_cols").value
-    speed = document.querySelector(".speed").value
-    resolution = document.querySelector(".resolution").value
+    speed = speed_slider.value
+    resolution = res_slider.value
     ROWS = Math.floor(height*(resolution/100.0))
     COLS = Math.floor(width*(resolution/100))
     CELL_WIDTH = width/COLS
@@ -193,7 +193,6 @@ function loop() {
 
     speed = max - (speed_slider.value-1)   
 
-    let res = res_slider.value
     while(res_slider.value!==resolution){resize_cells(res_slider.value)}
     
     if(count%speed==0){
