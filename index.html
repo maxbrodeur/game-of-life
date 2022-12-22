@@ -1,11 +1,37 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<link rel="stylesheet" href="stylesheet.css">
 		<title>Game of Life</title>
 	</head>
 	<body>
-	<button></button>
-    <canvas></canvas>
+		<canvas></canvas>
+
+		<div class="parameters">
+			
+			<div class="parameter">
+				<p>Number of initial cells</p>
+				<input type="number" class="num_cells" value="200">
+			</div>
+
+			<div class="parameter">
+				<div class="parameter_text"><p>Generation speed:&emsp;</p><p id="speed"></p></div>
+				<input type="range" class="speed" value="75" min="0" max="100">
+			</div>
+
+			<div class="parameter">
+				<div class="parameter_text">
+					<p>Resolution:&emsp;</p>
+					<p id="resolution"></p>
+				</div>
+				<input type="range" class="resolution" value="6" min="1" max="100">
+			</div>
+
+			<button class="run_button">RUN</button>
+
+			<p class="close_button">&#x2715</p>
+
+		</div>
 	</body>
     <script src="script.js"></script>
 </html>
