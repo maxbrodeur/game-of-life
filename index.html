@@ -6,31 +6,52 @@
 	</head>
 	<body>
 		<canvas></canvas>
-
-		<div class="parameters">
+		
+		<div class="menu">
 			
-			<div class="parameter">
-				<p>Number of initial cells</p>
-				<input type="number" class="num_cells" value="600">
-			</div>
+			<div class="buttons">
+				<button class="run_button button">RUN</button>
+				<button class="stop_button button">STOP</button>
+				<button class="clear_button button">CLEAR</button>
+				<button class="export_button button">EXPORT</button>
+				<button class="import_button button">IMPORT</button>
+			</div>	
 
-			<div class="parameter">
-				<div class="parameter_text"><p>Generation speed:&emsp;</p><p id="speed"></p></div>
-				<input type="range" class="speed" value="460" min="0" max="500">
-			</div>
+			<div class="parameters">
 
-			<div class="parameter">
-				<div class="parameter_text">
-					<p>Resolution:&emsp;</p>
-					<p id="resolution"></p>
+				<div class="parameter">
+					<div class="parameter_text"><p>FPS:&emsp;</p></div>
+					<input type="number" class="fps parameter_value" value="1" min="0" max="60">
 				</div>
-				<input type="range" class="resolution" value="10" min="1" max="100">
+
+				<div class="parameter">
+					<div class="parameter_text">
+						<p>Resolution (%):&emsp;</p>
+					</div>
+					<input type="number" class="resolution parameter_value" value="10" min="1" max="100">
+				</div>
+
+				<div class="parameter">
+					<div class="parameter_text">
+						<p>Mode:&emsp;</p>
+					</div>
+					<select class = "parameter_value" name="mode" id="mode">
+						<option value="presets">presets</option>
+						<option value="draw">draw</option>
+						<option value="random">random</option>
+					</select>
+				</div>
+				<div class="parameter preset">
+					<div class="parameter_text">
+						<p>Preset:&emsp;</p>
+					</div>
+					<select class = "parameter_value" name="preset" id="preset">
+						<option value="demo">demo</option>
+					</select>
+				</div>
 			</div>
 
-			<button class="run_button">RUN</button>
-
-			<p class="close_button">&#x2715</p>
-
+				<p class="close_button">&#x2715</p>
 		</div>
 	</body>
     <script src="script.js"></script>

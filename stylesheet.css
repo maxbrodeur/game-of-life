@@ -16,7 +16,7 @@ canvas {
     height: 100%;
 }
 
-.parameters {
+.menu {
     margin: 2vw;
     padding: 2vw;
     position: absolute;
@@ -27,18 +27,39 @@ canvas {
     background-color: white;
     border-radius: 10px;
     gap: 2vw;
+    width: fit-content;
+    z-index: 1;
 }
 
 .parameter {
+    width: 100%;
     position: relative;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     top: 0;
+    /* no wrap */
+    flex-wrap: nowrap; 
 }
 
-.parameter p {
+.parameters, .buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1vw;
+}
+
+.button {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    top: 0;
+    height: 5vh;
+    /* background-color: #4CAF50; */
+    /* color: white; */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .close_button {
@@ -49,13 +70,23 @@ canvas {
     cursor: pointer;
 }
 
-
-.parameter_text {
+.parameter_value {
+    position: relative;
     display: flex;
-    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    /* gap: 2vw; */
+    height: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    
 }
 
 .parameter_text p {
     white-space: nowrap;
 }
 
+.preset {
+    display: none;
+}
