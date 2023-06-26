@@ -23,7 +23,7 @@ const clear_button = document.querySelector(".clear_button");
 const fps_value = document.querySelector(".fps")
 const res_value = document.querySelector(".resolution")
 const mode_value = document.querySelector("#mode")
-const preset_value = document.querySelector("#preset")
+const preset_value = document.querySelector(".preset")
 
 // INITIAL SCREEN
 ctx.fillStyle = "rgb(0,0,0)"
@@ -146,7 +146,9 @@ class Game_of_life {
             if (this.mode==="random"){
                 this.generate_random()
             }
-        } 
+        } else {
+            this.update_all_neighbors()
+        }
     }
 
     init_matrix(){
@@ -342,6 +344,13 @@ function download(filename, text) {
 // function to read custom text file
 game_reader.onload = _ => {
     let data = game_reader.result
+    config = load_game(data)
+    game = new Game_of_life(config)
+    game.update_all_neighbors()
+};
+
+// function to load state of grid from text file
+function load_game(data){
     let lines = data.split('\n')
     let dims = lines[0].split(' ')
     let rows = parseInt(dims[0])
@@ -365,16 +374,14 @@ game_reader.onload = _ => {
         }
     }
 
-    config = {
+    return {
         rows: ROWS,
         cols: COLS,
         mode: mode,
         cells_matrix: cells_matrix
     }
-    game = new Game_of_life(config)
-    game.update_all_neighbors()
-};
 
+}
 
 
 // function to import state of grid from text file
@@ -414,9 +421,24 @@ function init(){
     // INITIAL VALUES
     running = true
     mode = mode_value.value
+
     if (mode === 'random'){
         res_value.value = Math.random()*10
     } 
+
+    res_value.value = Math.floor(res_value.value)
+    resolution = res_value.value
+    fps = fps_value.value
+    ROWS = Math.floor(height*(resolution/100.0))
+    COLS = Math.floor(width*(resolution/100.0))
+    CELL_WIDTH = width/COLS
+    CELL_HEIGHT = height/ROWS
+
+    var config = {
+        rows: ROWS,
+        cols: COLS,
+        mode: mode,
+    };
 
     if (mode === 'presets'){
         preset_value.style.display = 'flex'
@@ -424,11 +446,12 @@ function init(){
         file = './demo.txt'
         if (preset === 'demo'){
             file = './demo.txt'
+            // file = 'https://maxbrodeur.github.io/game-of-life/demo.txt'
         }
         fetch(file)
         .then(response => response.text())
         .then(data => {
-          console.log(data);
+            config = load_game(data)
         })
         .catch(error => {
           console.error('Error loading file:', error);
@@ -437,24 +460,12 @@ function init(){
         preset_value.style.display = 'none'
     }
 
-    fps = fps_value.value
-    res_value.value = Math.floor(res_value.value)
-    resolution = res_value.value
-    ROWS = Math.floor(height*(resolution/100.0))
-    COLS = Math.floor(width*(resolution/100.0))
-    CELL_WIDTH = width/COLS
-    CELL_HEIGHT = height/ROWS
-
-    const config = {
-        rows: ROWS,
-        cols: COLS,
-        mode: mode
-    };
     game = new Game_of_life(config);
 
 }
 
 function run() {
+    while(game === undefined){}
     loop();
 }
 
