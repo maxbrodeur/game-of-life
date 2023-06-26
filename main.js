@@ -66,6 +66,7 @@ function loop() {
         game.change_mode(mode);
         if (mode === 'presets'){
             preset_value.style.display = 'flex';
+            init()
         } else {
             preset_value.style.display = 'none';
         }

@@ -69,7 +69,7 @@ canvas.addEventListener("click", function(event){
     if (!in_parameters) {
         draw_mode(event)
     }
-    if (menu.style.display==="none" && !shift_state){
+    if ((menu.style.display==="none" || menu.style.display==='') && !shift_state){
         menu.style.display = "flex"
     }
 }, false);
