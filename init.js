@@ -129,7 +129,6 @@ game_reader.onload = _ => {
     let data = game_reader.result
     config = load_game(data)
     game = new Game_of_life(config)
-    game.update_all_neighbors()
 };
 
 
@@ -141,7 +140,6 @@ function import_game(){
     input.onchange = _ => {
             // you can use this method to get file and perform respective operations
                 let files =   Array.from(input.files);
-                console.log(files);
                 for (let i = 0; i < files.length; i++) {
                     const file = files[i];
                     game_reader.readAsText(file);

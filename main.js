@@ -70,8 +70,8 @@ function loop() {
         res_value.value = Math.floor(res_value.value); 
         resolution = res_value.value
     }
-    while(fps_value.value!==fps){f
-        ps = fps_value.value
+    while(fps_value.value!==fps){
+        fps = fps_value.value
     }
     while(mode_value.value!==mode){
         mode = mode_value.value; 
