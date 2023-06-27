@@ -21,7 +21,7 @@ class Cell {
         screenY = this.y*CELL_HEIGHT
         ctx.fillRect(screenX,screenY,CELL_WIDTH,CELL_HEIGHT)
         if (debug){
-            ctx.fillStyle = "rgb(0,0,0)"
+            ctx.fillStyle = "rgb(255,0,0)"
             ctx.fillText(this.neighbor_count,screenX+CELL_WIDTH/2,screenY+CELL_HEIGHT/2)
         }
     }
@@ -185,14 +185,20 @@ class Game_of_life {
     // update all cells states and neighbors
     update(){
         //cells
+        var to_update = []
         for (let i = 0; i < ROWS; i++) {
             for (let j = 0; j < COLS; j++) {
                 this.cells_matrix[i][j].draw(ctx)
                 let state_changed = this.cells_matrix[i][j].update()
                 if (state_changed){
-                    this.notify_neighbors(i, j)
+                    to_update.push([i,j])
                 }
             }
+        }
+        //neighbors
+        for (let i = 0; i < to_update.length; i++) {
+            const index = to_update[i];
+            this.notify_neighbors(index[0], index[1])
         }
     }
 
