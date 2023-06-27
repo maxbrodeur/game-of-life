@@ -23,7 +23,8 @@ const clear_button = document.querySelector(".clear_button");
 const fps_value = document.querySelector(".fps")
 const res_value = document.querySelector(".resolution")
 const mode_value = document.querySelector("#mode")
-const preset_value = document.querySelector(".preset")
+const preset_value = document.querySelector("#preset")
+const preset_parameter = document.querySelector(".preset")
 
 // INITIAL SCREEN
 ctx.fillStyle = "rgb(0,0,0)"
@@ -113,13 +114,13 @@ function load_game(data){
             cells_matrix[i][j].alive = parseInt(line[j])
         }
     }
-
-    return {
+    config = {
         rows: ROWS,
         cols: COLS,
         mode: mode,
         cells_matrix: cells_matrix
     }
+    return config
 
 }
 
@@ -169,6 +170,9 @@ run_button.onclick = function () {
     running = true
     if (mode === 'random'){
         game.generate_random()
+    }
+    if (mode === 'presets'){
+        init()
     }
 }
 

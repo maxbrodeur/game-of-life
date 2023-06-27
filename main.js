@@ -25,31 +25,41 @@ function init(){
     };
 
     if (mode === 'presets'){
-        preset_value.style.display = 'flex'
+        preset_parameter.style.display = 'flex'
         preset = preset_value.value
-        file = './demo.txt'
-        if (preset === 'demo'){
-            file = './demo.txt'
-            // file = 'https://maxbrodeur.github.io/game-of-life/demo.txt'
+        // if random preset, pick random 
+        if (preset === 'random preset'){
+            let keys = Object.keys(presets)
+            keys.push('random') // append random option key to keys
+            let random_key = keys[Math.floor(Math.random()*keys.length)]
+
+            if (random_key === 'random'){
+                config = {
+                    rows: ROWS,
+                    cols: COLS,
+                    mode: mode,
+                    randomize: true,
+                };
+            } else {
+                config = load_game(presets[random_key])
+            }
+
+        } else {
+            data = presets[preset]
+            if(data !== undefined){
+                config = load_game(data)
+            }
         }
-        fetch(file)
-        .then(response => response.text())
-        .then(data => {
-            config = load_game(data)
-        })
-        .catch(error => {
-          console.error('Error loading file:', error);
-        });
     } else {
         preset_value.style.display = 'none'
     }
-
     game = new Game_of_life(config);
+
+    
 
 }
 
 function run() {
-    while(game === undefined){}
     loop();
 }
 
@@ -60,19 +70,21 @@ function loop() {
         res_value.value = Math.floor(res_value.value); 
         resolution = res_value.value
     }
-    while(fps_value.value!==fps){fps = fps_value.value}
+    while(fps_value.value!==fps){f
+        ps = fps_value.value
+    }
     while(mode_value.value!==mode){
         mode = mode_value.value; 
         game.change_mode(mode);
         if (mode === 'presets'){
-            preset_value.style.display = 'flex';
+            preset_parameter.style.display = 'flex';
             init()
         } else {
-            preset_value.style.display = 'none';
+            preset_parameter.style.display = 'none';
         }
     }
     
-    // background
+    // paint over background
     ctx.fillStyle = "rgb(0,0,0)"
     ctx.fillRect(0,0,width,height)
     

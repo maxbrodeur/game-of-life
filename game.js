@@ -66,10 +66,15 @@ class Game_of_life {
         this.mode = config.mode || "random"
         this.cells_matrix = config.cells_matrix || []
         this.num_cells = 0
+        this.randomize = config.randomize || false
+
+        if (this.mode==="random"){
+            this.randomize = true
+        }
         
         if (this.cells_matrix.length==0){
             this.init_matrix()
-            if (this.mode==="random"){
+            if (this.randomize){
                 this.generate_random()
             }
         } else {
